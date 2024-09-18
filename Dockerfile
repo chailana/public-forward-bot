@@ -8,4 +8,5 @@ RUN pip3 install -r requirements.txt
 
 COPY . /app
 
-CMD gunicorn app:app & python3 main.py
+# Use a process manager or run both commands properly
+CMD ["sh", "-c", "gunicorn app:app & python3 main.py"]
