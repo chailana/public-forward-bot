@@ -28,7 +28,7 @@ async def start(client, message):
         text=START_MSG.format(
             message.from_user.first_name),
         reply_markup=buttons,
-        parse_mode="markdown")
+        parse_mode="markdown_v2")
 
 @Client.on_message(filters.command("stop"))
 async def stop_button(bot, message):
@@ -47,7 +47,7 @@ async def help(client, message):
     await client.send_message(
         chat_id=message.chat.id,
         text=HELP_MSG,
-        parse_mode="markdown")
+        parse_mode="markdown_v2")
 
 @Client.on_callback_query(filters.regex(r'^help$'))
 async def cb_help(bot, cb):
