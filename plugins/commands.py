@@ -5,8 +5,8 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 import asyncio
 import sys
 
-START_MSG = "Hi {},\nThis is a simple bot to forward all messages from one channel to other\n\n⚠️Warning\nYour account may get banned if you forward more files(from private channels). Use at Own Risk!!"
-HELP_MSG = "Available commands:-\n\n/index - To index a channel\n/forward - To start forwarding\n/total - Count total messages in DB\n/status - Check Current status\n/help - Help data\n/stop - To stop all running processes. \n\nUse /index to index messages from a channel to database.\n\nAfter indexing you can start forwarding by using /forward.\n\n<b>Note:</b>\nYou will require the following data to index a channel:-\n\n<b>Channel Invite Link</b>:- If channel is a Private channel User needs to join channel to access the messages. Please note that do not leave channel until forwarding completes.\n\n<b>Channel ID</b>:- If channel is a private channel you may need to enter Channel ID. Get it from @MissRose_bot.\n\n<b>SKIP_NO</b>:-From where you want to start Forwarding files. Give 0 if from starting\n\n<b>Caption</b>:- Custom Caption for forwarded files. Use 0 to use default captions.\nAfter forwarding completes use the /cleardb command to clean your database."
+START_MSG = "Hi {},\nThis is a simple bot to forward all messages from one channel to other.\n\n⚠️Warning: Your account may get banned if you forward more files from private channels. Use at your own risk!"
+HELP_MSG = "Available commands:\n\n/index - To index a channel\n/forward - To start forwarding\n/total - Count total messages in DB\n/status - Check current status\n/help - Help data\n/stop - To stop all running processes."
 
 buttons = InlineKeyboardMarkup(
     [
@@ -25,10 +25,10 @@ buttons = InlineKeyboardMarkup(
 async def start(client, message):
     await client.send_message(
         chat_id=message.chat.id,
-        text=START_MSG.format(
-            message.from_user.first_name),
+        text=START_MSG.format(message.from_user.first_name),
         reply_markup=buttons,
-        parse_mode="markdown_v2")
+        parse_mode="markdown_v2"
+    )
 
 @Client.on_message(filters.command("stop"))
 async def stop_button(bot, message):
@@ -47,20 +47,20 @@ async def help(client, message):
     await client.send_message(
         chat_id=message.chat.id,
         text=HELP_MSG,
-        parse_mode="markdown_v2")
+        parse_mode="markdown_v2"
+    )
 
 @Client.on_callback_query(filters.regex(r'^help$'))
 async def cb_help(bot, cb):
     await cb.message.edit_text(HELP_MSG)
 
-@Client.on_callback_query(filters.regex(r'^abt$'))   
+@Client.on_callback_query(filters.regex(r'^abt$'))
 async def cb_abt(bot, cb):
-    await cb.message.edit_text("Talking is cheap, Read Code.",
+    await cb.message.edit_text("Talking is cheap, read code.",
     reply_markup=InlineKeyboardMarkup(
         [
             [
                 InlineKeyboardButton("🔥 Source 🔥", url="https://t.me/CT_Arena/135"),
             ]
         ]
-    )
-                              )
+    ))
